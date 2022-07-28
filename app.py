@@ -32,10 +32,7 @@ def post_begin_survey():
 def show_questions(question_id):
     """for loop over satisfaction survey questions[0].question
     to generate each question per page index 0 - 3 initially """
-    # i = 0
-    # while i < satisfaction_survey.questions.length
-    #     question .question
-    #     i = i + 1
+    
     question = survey.questions[question_id]
 
     return render_template("question.html", question=question)
@@ -45,19 +42,9 @@ def take_answer():
 
     answer = request.form["answer"]
     responses.append(answer)
-
-    """redirect to the next question id"""
-    return
-
-
-
-
-
-
-
-
-
-
+    if len(responses) < len(survey.questions):
+        return redirect (f"/questions/{len(responses)}")
+    return redirect ("/completion")
 
 
 
