@@ -37,14 +37,17 @@ def show_questions(question_id):
     #     question .question
     #     i = i + 1
     question = survey.questions[question_id]
-    
+
     return render_template("question.html", question=question)
 
 @app.post("/answer")
 def take_answer():
 
-    answer = request.form("answer")
+    answer = request.form["answer"]
     responses.append(answer)
+
+    """redirect to the next question id"""
+    return
 
 
 
