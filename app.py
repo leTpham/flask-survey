@@ -15,28 +15,39 @@ responses = []
 @app.get("/begin")
 def get_begin_survey():
 
-    return render_template("survey_start.html")
+    return render_template("survey_start.html", survey=survey)
 
 # link post to button click link
+
 @app.post("/begin")
 def post_begin_survey():
 
-    return redirect("/question")
+    return redirect("/questions/0")
 
 
 
 
 
-@app.get("/questions")
-def show_questions():
+@app.get("/questions/<int:question_id>")
+def show_questions(question_id):
     """for loop over satisfaction survey questions[0].question
     to generate each question per page index 0 - 3 initially """
-    i = 0
-    while i < satisfaction_survey.questions.length
-        question .question
-        i = i + 1
+    # i = 0
+    # while i < satisfaction_survey.questions.length
+    #     question .question
+    #     i = i + 1
+    question = survey.questions[question_id].question
 
-    return render_template("question.html")
+    return render_template("question.html", question=question)
+
+@app.post("/answer")
+def take_answer():
+    
+    answer = request.form("answer")
+    responses.append(answer)
+
+
+
 
 
 

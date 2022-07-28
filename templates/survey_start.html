@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h1> {{survey_satisfaction.title}}</h1>
+  <h1> {{survey.title}}</h1>
   <p>
-    {{survey_satisfaction.instructions}}
+    {{survey.instructions}}
     BLA
   </p>
 
@@ -12,7 +12,7 @@
     You'll need to write the applicable code to handle this request
    -->
   <form action="/begin" method="POST">
-    
+
 
     <button>Start!</button>
   </form>

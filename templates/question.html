@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h1>{{ question.question }}</h1>
+  <h1>{{ question }}</h1>
 
   <form action="/answer" method="POST">
 
@@ -11,7 +11,7 @@
             type="radio"
             name="answer"
             value="value-goes-here">
-        choice-goes-here
+          
       </p>
         <!-- USING AJAX HERE -->
     <button>Continue</button>
