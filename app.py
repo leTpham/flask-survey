@@ -17,6 +17,11 @@ def get_begin_survey():
 
     return render_template("survey_start.html")
 
+# link post to button click link
+@app.post("/begin")
+def post_begin_survey():
+
+    return redirect("/question")
 
 
 
@@ -24,9 +29,15 @@ def get_begin_survey():
 
 @app.get("/questions")
 def show_questions():
-
+    """for loop over satisfaction survey questions[0].question
+    to generate each question per page index 0 - 3 initially """
+    i = 0
+    while i < satisfaction_survey.questions.length
+        question .question
+        i = i + 1
 
     return render_template("question.html")
+
 
 
 
