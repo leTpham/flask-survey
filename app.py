@@ -40,9 +40,18 @@ def show_questions(question_id):
     """for loop over satisfaction survey questions[0].question
     to generate each question per page index 0 - 3 initially """
 
-    question = survey.questions[question_id]
 
+    responses = session["responses"]
+
+    if (question_id != len(responses)):
+        return redirect (f"/questions/{len(responses)}")
+
+    if (len(responses)==len(survey.questions)):
+        return redirect ("/completion")
+
+    question = survey.questions[question_id]
     return render_template("question.html", question=question)
+
 
 @app.post("/answer")
 def take_answer():
