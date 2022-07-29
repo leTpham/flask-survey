@@ -11,12 +11,12 @@ debug = DebugToolbarExtension(app)
 
 # empty list to store the user's responses
 
-responses = []
+# responses = []
 
-# @app.get("/")
-# def start_route():
-    #put in session["reponses"] = []
-    #return redirect ("/begin")
+@app.get("/")
+def start_route():
+    session["responses"] = []
+    return redirect ("/begin")
 
 
 @app.get("/begin")
@@ -24,7 +24,7 @@ def get_begin_survey():
 
     return render_template("survey_start.html", survey=survey)
 
-# link post to button click link
+
 
 @app.post("/begin")
 def post_begin_survey():
@@ -49,11 +49,16 @@ def take_answer():
 
     answer = request.form["answer"]
 
+    responses = session["responses"]
+
+
     responses.append(answer)
-    
+    session["responses"] = responses
     #set variable (answers_collected) for session["responses"]
+
     #append answer from form to answers_collected
     #reset session["responses"] to be equal to answers_collected
+
 
     if len(responses) < len(survey.questions):
         return redirect (f"/questions/{len(responses)}")
@@ -66,3 +71,13 @@ def take_answer():
 def lets_open_completion():
     """redirect to this after survey is completed"""
     return render_template("completion.html")
+
+
+
+    """step 7
+
+    if the length of responses is less than
+    the question id
+
+
+    """
