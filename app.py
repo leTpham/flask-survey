@@ -16,7 +16,7 @@ debug = DebugToolbarExtension(app)
 @app.get("/")
 def start_route():
     session["responses"] = []
-    return redirect ("/begin")
+    return redirect("/begin")
 
 
 @app.get("/begin")
@@ -25,14 +25,10 @@ def get_begin_survey():
     return render_template("survey_start.html", survey=survey)
 
 
-
 @app.post("/begin")
 def post_begin_survey():
 
     return redirect("/questions/0")
-
-
-
 
 
 @app.get("/questions/<int:question_id>")
@@ -40,14 +36,14 @@ def show_questions(question_id):
     """for loop over satisfaction survey questions[0].question
     to generate each question per page index 0 - 3 initially """
 
-
     responses = session["responses"]
 
-    if (question_id != len(responses)):
-        return redirect (f"/questions/{len(responses)}")
+    if question_id != len(responses):
+        flash("You're not supposed to go there!")
+        return redirect(f"/questions/{len(responses)}")
 
-    if (len(responses)==len(survey.questions)):
-        return redirect ("/completion")
+    if len(responses) == len(survey.questions):
+        return redirect("/completion")
 
     question = survey.questions[question_id]
     return render_template("question.html", question=question)
@@ -60,33 +56,19 @@ def take_answer():
 
     responses = session["responses"]
 
-
     responses.append(answer)
     session["responses"] = responses
-    #set variable (answers_collected) for session["responses"]
+    # set variable (answers_collected) for session["responses"]
 
-    #append answer from form to answers_collected
-    #reset session["responses"] to be equal to answers_collected
-
+    # append answer from form to answers_collected
+    # reset session["responses"] to be equal to answers_collected
 
     if len(responses) < len(survey.questions):
-        return redirect (f"/questions/{len(responses)}")
-    return redirect ("/completion")
-
-
+        return redirect(f"/questions/{len(responses)}")
+    return redirect("/completion")
 
 
 @app.get("/completion")
 def lets_open_completion():
     """redirect to this after survey is completed"""
     return render_template("completion.html")
-
-
-
-    """step 7
-
-    if the length of responses is less than
-    the question id
-
-
-    """
