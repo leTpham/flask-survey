@@ -10,7 +10,14 @@ debug = DebugToolbarExtension(app)
 
 
 # empty list to store the user's responses
+
 responses = []
+
+# @app.get("/")
+# def start_route():
+    #put in session["reponses"] = []
+    #return redirect ("/begin")
+
 
 @app.get("/begin")
 def get_begin_survey():
@@ -32,7 +39,7 @@ def post_begin_survey():
 def show_questions(question_id):
     """for loop over satisfaction survey questions[0].question
     to generate each question per page index 0 - 3 initially """
-    
+
     question = survey.questions[question_id]
 
     return render_template("question.html", question=question)
@@ -41,7 +48,13 @@ def show_questions(question_id):
 def take_answer():
 
     answer = request.form["answer"]
+
     responses.append(answer)
+    
+    #set variable (answers_collected) for session["responses"]
+    #append answer from form to answers_collected
+    #reset session["responses"] to be equal to answers_collected
+
     if len(responses) < len(survey.questions):
         return redirect (f"/questions/{len(responses)}")
     return redirect ("/completion")
